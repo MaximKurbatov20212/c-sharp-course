@@ -9,7 +9,6 @@ namespace lab1
 
 
     public class DeckShuffler : IDeckShuffler {
-        private static int deckSize = 36;
         private Card[] _cards;
         private readonly Random _rand = new Random();
 
@@ -25,11 +24,11 @@ namespace lab1
         }
 
         public DeckShuffler()  {
-            _cards = new Card[deckSize];
+            _cards = new Card[CollisiumSandbox.DeckSize];
 
-            for (int i = 0; i < deckSize; i++)
+            for (int i = 0; i < CollisiumSandbox.DeckSize; i++)
             {
-                _cards[i] = new Card(i >= (deckSize / 2) ? CardColor.Red : CardColor.Black);
+                _cards[i] = new Card(i >= (CollisiumSandbox.DeckSize / 2) ? CardColor.Red : CardColor.Black);
             }
         }
     }

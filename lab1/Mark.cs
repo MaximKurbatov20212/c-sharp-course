@@ -4,7 +4,12 @@ namespace lab1
     public class Mark : IPlayer {
         private Card[] _cards;
         
-        private readonly ICardPickStrategy _strategy = new ElonStrategy();
+        private readonly ICardPickStrategy _strategy;
+
+        public Mark(ICardPickStrategy strategy)
+        {
+            _strategy = strategy;
+        }
 
         public Card ChooseCard(int n) {
             return _cards[n];

@@ -6,20 +6,21 @@ namespace lab1
     {
         private Card[] _cards;
         
-        private readonly ICardPickStrategy _strategy = new ElonStrategy();
+        private readonly ICardPickStrategy _strategy;
 
+        
+        public Elon(ICardPickStrategy strategy)
+        {
+            _strategy = strategy;
+        }
+        
         public Card ChooseCard(int n) {
             return _cards[n];
         }
 
-        // public Elon(Card[] cards)
-        // {
-        //     _cards = cards;
-        // }
-
         public void SetCards(Card[] cards)
         {
-            this._cards = cards;
+            _cards = cards;
         }
 
         public int SayCard() {

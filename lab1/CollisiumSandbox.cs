@@ -1,6 +1,4 @@
-
 using System;
-using System.Linq;
 
 namespace lab1
 {
@@ -8,13 +6,17 @@ namespace lab1
     {
         private readonly Elon _elon;
         private readonly Mark _mark;
+        public const int DeckSize = 36;
+        private readonly CardsSplitter _splitter = new CardsSplitter();
 
         public bool Play(Card[] cards)
         {
-            if (cards.Length != 36) throw new Exception();
+            if (cards.Length != DeckSize) throw new Exception();
 
-            _mark.SetCards(cards.ToList().GetRange(0, 18).ToArray());
-            _elon.SetCards(cards.ToList().GetRange(18, 18).ToArray());
+            var (part1, part2) = _splitter.GetDeckForPlayers(cards);
+
+            _mark.SetCards(part1);
+            _elon.SetCards(part2);
             
             return _elon.ChooseCard(_mark.SayCard()).Color == _mark.ChooseCard(_elon.SayCard()).Color;
         }

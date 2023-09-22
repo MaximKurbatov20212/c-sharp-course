@@ -184,6 +184,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="CardColor.cs" />
+        <Compile Include="CardsSpliter.cs" />
         <Compile Include="CollisiumExperimentWorker.cs" />
         <Compile Include="Card.cs" />
         <Compile Include="DeckShuffler.cs" />

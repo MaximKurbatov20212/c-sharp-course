@@ -2,20 +2,27 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
+// github.com/mvcdev/DEvil
+// mock
 
 namespace lab1
 {
     public class CollisiumExperimentWorker : IHostedService
     {
         private readonly int _count = 1000000;
-        private DeckShuffler _deckShuffler = new DeckShuffler();
+        private readonly DeckShuffler _deckShuffler = new DeckShuffler();
+
+        // private CollisiumSandbox game;
+        // public CollisiumExperimentWorker()
         
         public void Play()
         {
             int win = 0;
             
             for (int i = 0; i < _count; i++) {
-                CollisiumSandbox game = new CollisiumSandbox(new Elon(), new Mark());
+                CollisiumSandbox game = new CollisiumSandbox(new Elon(new PickFirstRedCardStrategy()),
+                                                            new Mark(new PickFirstRedCardStrategy()));
+                
                 win += game.Play(_deckShuffler.GetDeck()) ? 1 : 0;
             }
             Console.WriteLine((double) win / _count * 100 + "%"); 
