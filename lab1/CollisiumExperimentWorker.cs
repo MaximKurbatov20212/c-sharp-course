@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
+
 // github.com/mvcdev/DEvil
 // mock
 
@@ -10,27 +11,31 @@ namespace lab1
     public class CollisiumExperimentWorker : IHostedService
     {
         private readonly int _count = 1000000;
-        private readonly DeckShuffler _deckShuffler = new DeckShuffler();
+        
+        private readonly IDeckShuffler _deckShuffler;
+        private readonly CollisiumSandbox _sandbox;
 
-        // private CollisiumSandbox game;
-        // public CollisiumExperimentWorker()
+        public CollisiumExperimentWorker(CollisiumSandbox sandbox, IDeckShuffler deckShuffler)
+        {
+            _sandbox = sandbox;
+            _deckShuffler = deckShuffler;
+        }
         
         public void Play()
         {
             int win = 0;
             
             for (int i = 0; i < _count; i++) {
-                CollisiumSandbox game = new CollisiumSandbox(new Elon(new PickFirstRedCardStrategy()),
-                                                            new Mark(new PickFirstRedCardStrategy()));
-                
-                win += game.Play(_deckShuffler.GetDeck()) ? 1 : 0;
+                _deckShuffler.ShuffleDeck();
+                win += _sandbox.Play(_deckShuffler.GetDeck()) ? 1 : 0;
             }
-            Console.WriteLine((double) win / _count * 100 + "%"); 
+            
+            Console.WriteLine("Wins : " + (double) win / _count * 100 + "%"); 
         }
         
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            Play();
+            Task.Run(Play, cancellationToken);
             return Task.CompletedTask;
             
         }
@@ -39,5 +44,6 @@ namespace lab1
         {
             return Task.CompletedTask;
         }
+        
     }
 }

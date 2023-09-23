@@ -1,3 +1,6 @@
+using System;
+using System.Security.Permissions;
+
 namespace lab1
 {
     public interface ICardPickStrategy
@@ -9,6 +12,8 @@ namespace lab1
     {
         public int Pick(Card[] cards)
         {
+            if (cards.Length != CollisiumSandbox.DeckSize / 2) throw new InvalidDeckSizeException();
+            
             for (int i = 0; i < cards.Length; i++)
             {
                 if (cards[i].Color == CardColor.Red) {

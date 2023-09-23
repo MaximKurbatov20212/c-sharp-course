@@ -5,6 +5,7 @@ namespace lab1
 {
     public interface IDeckShuffler {
         void ShuffleDeck();
+        Card[] GetDeck();
     }
 
 
@@ -14,12 +15,17 @@ namespace lab1
 
         public void ShuffleDeck()
         {
-            _cards = _cards.ToList().OrderBy(x => _rand.Next()).ToArray();
+            Card[] newCards;
+            do
+            {
+                newCards = _cards.ToList().OrderBy(x => _rand.Next()).ToArray();
+            } while (Equals(_cards, newCards));
+
+            _cards = newCards;
         }
         
         public Card[] GetDeck()
         {
-            ShuffleDeck();
             return _cards;
         }
 
@@ -28,7 +34,7 @@ namespace lab1
 
             for (int i = 0; i < CollisiumSandbox.DeckSize; i++)
             {
-                _cards[i] = new Card(i >= (CollisiumSandbox.DeckSize / 2) ? CardColor.Red : CardColor.Black);
+                _cards[i] = new Card(i >= CollisiumSandbox.DeckSize / 2 ? CardColor.Red : CardColor.Black);
             }
         }
     }
