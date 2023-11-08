@@ -1,18 +1,25 @@
 using System;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
 
 namespace lab1
 {
-    public class CollisiumSandbox
+    // public interface ICollisiumSandbox
+    // {
+    //     bool Play(Card[] cards);
+    // }
+    //
+    public class CollisiumSandbox 
     {
-        private readonly Elon _elon;
-        private readonly Mark _mark;
+        private IPlayer _elon { get; }
+        private IPlayer _mark { get; }
+        
         public const int DeckSize = 36;
         private readonly CardsSplitter _splitter = new CardsSplitter();
         
 
         public bool Play(Card[] cards)
         {
-            if (cards.Length != DeckSize) throw new InvalidDeckSizeException();
+            if (cards.Length != DeckSize) throw new InvalidDeckSizeException("GET: " + cards.Length);
 
             var (part1, part2) = _splitter.GetDeckForPlayers(cards);
 
@@ -25,7 +32,7 @@ namespace lab1
             return markCard.Color == elonCard.Color;
         }
 
-        public CollisiumSandbox(Elon elon, Mark mark)
+        public CollisiumSandbox(IPlayer elon, IPlayer mark)
         {
             _elon = elon;
             _mark = mark;

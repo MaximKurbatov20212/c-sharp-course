@@ -22,7 +22,8 @@ namespace exe
                     services.AddScoped<IDeckShuffler, DeckShuffler>();
                     services.AddScoped<Elon>();
                     services.AddScoped<Mark>();
-                    services.AddScoped<ICardPickStrategy, PickFirstRedCardStrategy>();
+                    services.AddScoped<ICardPickMarkStrategy, StratagyNumberOne>();
+                    services.AddScoped<ICardPickElonStrategy, StratagyNumberOne>();
                 });
         }
     }

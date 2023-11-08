@@ -6,10 +6,10 @@ namespace lab1
     {
         private Card[] _cards;
         
-        private readonly ICardPickStrategy _strategy;
+        private readonly ICardPickElonStrategy _strategy;
 
         
-        public Elon(ICardPickStrategy strategy)
+        public Elon(ICardPickElonStrategy strategy)
         {
             _strategy = strategy;
         }

@@ -3,14 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 
-// github.com/mvcdev/DEvil
-// mock
-
 namespace lab1
 {
     public class CollisiumExperimentWorker : IHostedService
     {
-        private readonly int _count = 1000000;
+        private readonly int _count = 1;
         
         private readonly IDeckShuffler _deckShuffler;
         private readonly CollisiumSandbox _sandbox;
@@ -44,6 +41,5 @@ namespace lab1
         {
             return Task.CompletedTask;
         }
-        
     }
 }

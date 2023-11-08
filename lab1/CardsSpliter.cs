@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace lab1
 {
@@ -7,7 +6,7 @@ namespace lab1
     {
         public (Card[], Card[]) GetDeckForPlayers(Card[] cards)
         {
-            if (cards.Length != CollisiumSandbox.DeckSize) throw new InvalidDeckSizeException();
+            if (cards.Length != CollisiumSandbox.DeckSize) throw new InvalidDeckSizeException("GET: " + cards.Length);
 
             return (cards.ToList().GetRange(0, CollisiumSandbox.DeckSize / 2).ToArray(),
                 cards.ToList().GetRange(CollisiumSandbox.DeckSize / 2, CollisiumSandbox.DeckSize / 2).ToArray());

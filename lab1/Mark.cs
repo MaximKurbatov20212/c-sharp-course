@@ -4,9 +4,9 @@ namespace lab1
     public class Mark : IPlayer {
         private Card[] _cards;
         
-        private readonly ICardPickStrategy _strategy;
+        private readonly ICardPickMarkStrategy _strategy;
 
-        public Mark(ICardPickStrategy strategy)
+        public Mark(ICardPickMarkStrategy strategy)
         {
             _strategy = strategy;
         }
